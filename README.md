@@ -1,0 +1,1 @@
+Max-it game in C++. Computer uses minimax algo with alpha beta pruning to calculate his moves. Working with different grid sizes and different depths of traversing the game tree. WARNING! The game tree has enormous amount of nodes for grids larger than 4x4. Using search with big depth (more than 7) with grids larger than 8x8 may kill your RAM. Be careful!
