@@ -9,6 +9,7 @@ Position::Position(int r, int c)
     row_ = r;
     col_ = c;
 }
+Position::~Position() {}
 void Position::reset()
 {
     row_ = -1;

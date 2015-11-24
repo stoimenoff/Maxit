@@ -13,7 +13,7 @@ public:
     static const int MAX_NUM = 20;
     Tree(int **initial_grid, Position *initial_pos);
     ~Tree();
-    Node* getRoot() {return root;}
+    //Node* getRoot() {return root;}
     bool makeMove(int row, int col); //returns 1 for success and 0 for failure
     bool makeBestMove();
     void printGrid();

@@ -26,6 +26,7 @@ Tree::~Tree()
     {
         delete[] grid[i];
     }
+    delete grid;
     delete root;
     delete best_move;
 }
@@ -76,8 +77,8 @@ bool Tree::makeMove(int row, int col)
     if(row >= g_size || row < 0) return false;
     if(col >= g_size || col < 0) return false;
     if(grid[row][col] == MAX_NUM) return false;
-    //if(root->is_max() && root->getCursorCol() != col) return false;
-    //if(!root->is_max() && root->getCursorRow()!= row) return false;
+    if(root->is_max() && root->getCursorCol() != col) return false;
+    if(!root->is_max() && root->getCursorRow()!= row) return false;
 
     Node* new_root = root->removeChild(row, col);
 
@@ -190,7 +191,6 @@ bool Tree::makeBestMove()
     int alpha = -g_size * g_size * MAX_NUM;
     int beta = g_size * g_size * MAX_NUM;
     alphaBetaMiniMax(root, alpha, beta); //calculate best move
-    //std::cout<<"best move calculated : "<<best_move->row()<<" "<<best_move->column()<<std::endl;
     return makeMove(best_move->row(), best_move->column());
 }
 

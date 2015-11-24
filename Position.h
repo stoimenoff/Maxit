@@ -6,6 +6,7 @@ private:
 public:
     Position();
     Position(int r, int c);
+    ~Position();
 
     int column() {return col_;}
     int row() {return row_;}

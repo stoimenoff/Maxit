@@ -1,5 +1,6 @@
 #include"Node.h"
-const int Node::grid_size = 4;
+#include<iostream>
+const int Node::grid_size = 5;
 Node::Node(Node *parent, Position *cur, int diff, bool is_max)
 {
     this->parent = parent;
@@ -30,22 +31,27 @@ Node::Node(Node *parent, Position *cur, int diff, bool is_max)
 Node::~Node()
 {
     //delete children
-    for (std::vector< Node* >::iterator child = children.begin() ; child != children.end(); child++)
+    while(children.size() > 0)
     {
-        delete (*child);
+        delete children.back();
+        children.pop_back();
     }
-    for (std::vector< Position* >::iterator pos = available_moves.begin() ; pos != available_moves.end(); pos++)
+
+    while(available_moves.size() > 0)
     {
-        delete (*pos);
+        delete available_moves.back();
+        available_moves.pop_back();
     }
     children.clear();
     available_moves.clear();
+    delete cursor;
 }
 void Node::addChild(Node *child)
 {
     if(*(available_moves.back()) == *(child->getCursorPosition()))
     {
         children.push_back(child);
+	delete available_moves.back();
         available_moves.pop_back();
     }
 }
@@ -80,6 +86,7 @@ void Node::setMoveToUnavailable(Position *move_pos)
     {
         if(*available_moves[i] == *move_pos)
         {
+	    delete available_moves[i];
             available_moves.erase(available_moves.begin() + i);
             break;
         }
@@ -87,6 +94,7 @@ void Node::setMoveToUnavailable(Position *move_pos)
 }
 void Node::setMoveToUnavailable(int row, int col)
 {
-    Position pos(row, col);
-    setMoveToUnavailable(&pos);
+    Position *pos = new Position(row, col);
+    setMoveToUnavailable(pos);
+    delete pos;
 }
