@@ -51,7 +51,8 @@ void Node::addChild(Node *child)
     if(*(available_moves.back()) == *(child->getCursorPosition()))
     {
         children.push_back(child);
-	delete available_moves.back();
+        child->setParent(this);
+        delete available_moves.back();
         available_moves.pop_back();
     }
 }
@@ -67,6 +68,9 @@ Node* Node::removeChild(int row, int col)
         }
     }
     return nullptr;
+}
+Node* Node::removeChild(Position *child_cursor) {
+    return removeChild(child_cursor->row(), child_cursor->column());
 }
 bool Node::isLeaf()
 {

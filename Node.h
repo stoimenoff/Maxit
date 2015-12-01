@@ -38,6 +38,7 @@ public:
 
     void addChild(Node *child);
     Node* removeChild(int row, int col);
+    Node* removeChild(Position *child_cursor);
 };
 
 

@@ -1,14 +1,9 @@
 #include"Position.h"
 Position::Position()
 {
-    row_ = -1;
-    col_ = -1;
+    Position(-1, -1);
 }
-Position::Position(int r, int c)
-{
-    row_ = r;
-    col_ = c;
-}
+Position::Position(int r, int c) : row_(r), col_(c) {}
 Position::~Position() {}
 void Position::reset()
 {

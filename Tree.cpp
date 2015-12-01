@@ -1,7 +1,9 @@
 #include"Tree.h"
 #include<iostream>
-Tree::Tree(int **initial_grid, Position *initial_pos)
+Tree::Tree(int **initial_grid, Position *initial_pos, int max_num, int max_depth)
 {
+    MAX_DEPTH = max_depth;
+    MAX_NUM = max_num;
     grid = new int*[g_size];
     for(int i = 0; i < g_size; i++)
     {
@@ -110,7 +112,7 @@ int Tree::alphaBetaMiniMax(Node* node, int alpha, int beta)
         //std::cout<<"Hit the floor - leaf !\n";
         if(node == root)
         {
-            std::cout<<"Root is leaf\n";
+            //std::cout<<"Root is leaf\n";
             best_move->reset();
         }
         return node->getDiff();
@@ -187,7 +189,6 @@ int Tree::alphaBetaMiniMax(Node* node, int alpha, int beta)
 }
 bool Tree::makeBestMove()
 {
-    const int g_size = Node::grid_size;
     int alpha = -g_size * g_size * MAX_NUM;
     int beta = g_size * g_size * MAX_NUM;
     alphaBetaMiniMax(root, alpha, beta); //calculate best move
